@@ -1,63 +1,35 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-import PrivateRoute from "./components/PrivateRoute";
-
-import Dashboard from "./pages/Dashboard";
-import Vehicles from "./pages/Vehicles";
-import Drivers from "./pages/Drivers";
-import Reports from "./pages/Reports";
-
-// (you can replace these with styled components later)
-const Login = () => <h2>Login Page (TODO)</h2>;
-const Unauthorized = () => <h2>Unauthorized Access</h2>;
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Public routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
+  const [count, setCount] = useState(0)
 
-          {/* Protected routes */}
-          <Route
-            path="/"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/vehicles"
-            element={
-              <PrivateRoute roles={["manager", "management"]}>
-                <Vehicles />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/drivers"
-            element={
-              <PrivateRoute roles={["manager", "management"]}>
-                <Drivers />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/reports"
-            element={
-              <PrivateRoute roles={["manager", "management"]}>
-                <Reports />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+  return (
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
 
-export default App;
+export default App
